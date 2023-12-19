@@ -8,7 +8,7 @@ public class AppOrderDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+//
     @ManyToOne
     private AppOrder orderid;
 
