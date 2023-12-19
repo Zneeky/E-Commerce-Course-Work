@@ -1,26 +1,27 @@
 package com.obuvki.rest.Models;
 import jakarta.persistence.*;
 import lombok.Data;
-
+import java.util.Set;
 @Entity
 @Data
 public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  long id;
+    @Column(name="userid")
+    private  long userid;
 
-    @Column
+    @Column(name="email")
     private  String email;
 
-    @Column
+    @Column(name="password")
     private String password;
 
-    @Column
-    private  String firstName;
+    @Column(name="username")
+    private  String username;
 
-    @Column
-    private  String lastName;
+    @OneToMany(mappedBy = "userid")
+    private Set<AppOrder> orders;
 
-    @Column
-    private  int age;
+    @OneToOne(mappedBy = "userid")
+    private AppCart cartUser;
 }
