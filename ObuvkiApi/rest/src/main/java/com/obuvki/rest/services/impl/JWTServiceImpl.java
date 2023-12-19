@@ -12,6 +12,7 @@ import  io.jsonwebtoken.Jwts;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.Map;
 import java.util.function.Function;
 
 @Service
@@ -22,6 +23,14 @@ public class JWTServiceImpl implements JWTService {
         return Jwts.builder().setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
+                .signWith(getSignKey(), SignatureAlgorithm.HS256)
+                .compact();
+    }
+
+    public String generateRefreshToken(Map<String, Object> extractClaims, UserDetails userDetails){
+        return Jwts.builder().setClaims(extractClaims).setSubject(userDetails.getUsername())
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + 604800000))
                 .signWith(getSignKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
@@ -37,7 +46,7 @@ public class JWTServiceImpl implements JWTService {
 
 
     private Key getSignKey(){
-        byte[] key = Decoders.BASE64.decode("Marinata");
+        byte[] key = Decoders.BASE64.decode("42134124hj124g12yu4g1241241221412bh4124utg23yugf132uy312321313");
         return Keys.hmacShaKeyFor(key);
     }
 
