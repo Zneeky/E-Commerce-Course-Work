@@ -1,6 +1,7 @@
 package com.obuvki.rest.Controller;
 
 import com.obuvki.rest.DTO.JwtAuthenticationResponse;
+import com.obuvki.rest.DTO.RefreshTokenRequest;
 import com.obuvki.rest.DTO.SignInRequest;
 import com.obuvki.rest.DTO.SignUpRequest;
 import com.obuvki.rest.Models.AppUser;
@@ -27,5 +28,10 @@ public class AuthenticationController {
     @PostMapping("/signin")
     public ResponseEntity<JwtAuthenticationResponse> signin(@RequestBody SignInRequest signInRequest) throws IllegalAccessException {
         return ResponseEntity.ok(authenticationService.signin(signInRequest));
+    }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<JwtAuthenticationResponse> refresh(@RequestBody RefreshTokenRequest refreshTokenRequest) throws IllegalAccessException {
+        return ResponseEntity.ok(authenticationService.refreshToken(refreshTokenRequest));
     }
 }
