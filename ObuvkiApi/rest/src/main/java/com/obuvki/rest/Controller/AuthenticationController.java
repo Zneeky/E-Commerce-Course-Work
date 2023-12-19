@@ -1,5 +1,7 @@
 package com.obuvki.rest.Controller;
 
+import com.obuvki.rest.DTO.JwtAuthenticationResponse;
+import com.obuvki.rest.DTO.SignInRequest;
 import com.obuvki.rest.DTO.SignUpRequest;
 import com.obuvki.rest.Models.AppUser;
 import com.obuvki.rest.services.AuthenticationService;
@@ -20,5 +22,10 @@ public class AuthenticationController {
     @PostMapping("/signup")
     public ResponseEntity<AppUser> signup(@RequestBody SignUpRequest signUpRequest){
         return ResponseEntity.ok(authenticationService.signup(signUpRequest));
+    }
+
+    @PostMapping("/signin")
+    public ResponseEntity<JwtAuthenticationResponse> signin(@RequestBody SignInRequest signInRequest) throws IllegalAccessException {
+        return ResponseEntity.ok(authenticationService.signin(signInRequest));
     }
 }
