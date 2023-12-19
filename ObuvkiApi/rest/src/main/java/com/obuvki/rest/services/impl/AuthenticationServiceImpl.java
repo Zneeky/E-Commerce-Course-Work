@@ -1,6 +1,7 @@
 package com.obuvki.rest.services.impl;
 
 import com.obuvki.rest.DTO.JwtAuthenticationResponse;
+import com.obuvki.rest.DTO.RefreshTokenRequest;
 import com.obuvki.rest.DTO.SignInRequest;
 import com.obuvki.rest.DTO.SignUpRequest;
 import com.obuvki.rest.Models.AppUser;
@@ -56,4 +57,22 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         return jwtAuthenticationResponse;
     }
+
+    public JwtAuthenticationResponse refreshToken(RefreshTokenRequest refreshTokenRequest){
+        String userEmail = jwtService.extractUserName(refreshTokenRequest.getToken());
+        AppUser user = userRepository.findByEmail(userEmail).orElseThrow();
+
+        if(jwtService.isTokenValid(refreshTokenRequest.getToken(),user)){
+            var jwt = jwtService.generateToken(user);
+
+            JwtAuthenticationResponse jwtAuthenticationResponse = new JwtAuthenticationResponse();
+
+            jwtAuthenticationResponse.setToken(jwt);
+            jwtAuthenticationResponse.setRefreshToken(refreshTokenRequest.getToken());
+
+            return jwtAuthenticationResponse;
+        }
+        return null;
+    }
+
 }
