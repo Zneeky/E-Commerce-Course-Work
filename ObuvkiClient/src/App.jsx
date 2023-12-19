@@ -8,6 +8,7 @@ import { ProductProvider } from './contexts/product-context'
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from './components/navbar/navbar'
+import Details from './pages/detail.jsx'
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
             <Route path='/register' element={<Register />} />
             <Route path='/login' element={<Login />} />
             <Route path={'/cart'} element={<Cart />} />
+            <Route path="/details" element={<Details/>} />
             <Route exact path="/" element={<ProductList/>} />
           </Routes>
         </div>
