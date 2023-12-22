@@ -33,7 +33,7 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(request -> request.requestMatchers("/api/v1/auth/**")
+                .authorizeHttpRequests(request -> request.requestMatchers("/api/v1/auth/**", "/api/v1/cart/**")
                         .permitAll()
                         // Add this line to permit all Swagger-related requests
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs", "/swagger-resources/**", "/swagger-ui.html", "/webjars/**", "/v3/api-docs/swagger-config").permitAll()

@@ -8,13 +8,12 @@ import java.util.List;
 public class AppCart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  long cartid;
+    @Column(name="id")
+    private  long id;
 
     @OneToOne
-    @JoinColumn(name = "userid", referencedColumnName = "userid", unique = true)
-    private AppUser userid;
+    @JoinColumn(name = "user_id", referencedColumnName = "id", unique = true)
+    private AppUser user;
 
-    @OneToMany(mappedBy = "cartid")
-    private List<AppCartDetails> cartDetailsList;
 
 }

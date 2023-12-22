@@ -4,10 +4,12 @@ import com.obuvki.rest.DTO.JwtAuthenticationResponse;
 import com.obuvki.rest.DTO.RefreshTokenRequest;
 import com.obuvki.rest.DTO.SignInRequest;
 import com.obuvki.rest.DTO.SignUpRequest;
+import com.obuvki.rest.Models.AppCart;
 import com.obuvki.rest.Models.AppUser;
 import com.obuvki.rest.Models.Role;
 import com.obuvki.rest.repository.UserRepository;
 import com.obuvki.rest.services.AuthenticationService;
+import com.obuvki.rest.services.CartService;
 import com.obuvki.rest.services.JWTService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -30,6 +32,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     private final JWTService jwtService;
 
+    private final CartService cartService;
+
     //TODO: Remove attributes firstname/lastname since in the FE only username is required
     public AppUser signup(SignUpRequest signUpRequest){
         AppUser user = new AppUser();
@@ -37,8 +41,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         user.setEmail(signUpRequest.getEmail());
         user.setRole(Role.USER);
         user.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
-
-        return userRepository.save(user);
+        userRepository.save(user);
+        cartService.createCart(user);
+        return user;
     }
 
 

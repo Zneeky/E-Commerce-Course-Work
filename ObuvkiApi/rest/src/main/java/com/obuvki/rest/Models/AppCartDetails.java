@@ -9,10 +9,12 @@ public class AppCartDetails {
     private Long id;
 
     @ManyToOne
-    private AppCart cartid;
+    @JoinColumn(name="cart_id")
+    private AppCart cart;
 
     @ManyToOne
-    private AppProduct productid;
+    @JoinColumn(name="product_id")
+    private AppProduct product;
 
     private Integer quantity;
 }

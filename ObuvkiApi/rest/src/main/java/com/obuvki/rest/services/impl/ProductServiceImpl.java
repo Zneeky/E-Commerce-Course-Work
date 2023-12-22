@@ -32,7 +32,7 @@ public class ProductServiceImpl implements ProductService {
         {
            ExportProductDto exportProduct =  new ExportProductDto();
            exportProduct.setProductName(product.getProductName());
-           exportProduct.setId(product.getProductid());
+           exportProduct.setId(product.getId());
            exportProduct.setCompany(product.getBrand());
            exportProduct.setImageURL(product.getImageURL());
            exportProduct.setSize(product.getSize());

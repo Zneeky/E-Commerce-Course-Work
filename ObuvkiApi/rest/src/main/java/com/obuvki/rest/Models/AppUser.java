@@ -14,8 +14,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class AppUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="userid")
-    private  long userid;
+    @Column(name="id")
+    private  long id;
 
     @Column(name="email")
     private  String email;
@@ -29,8 +29,8 @@ public class AppUser implements UserDetails {
     @OneToMany(mappedBy = "userid")
     private Set<AppOrder> orders;
 
-    @OneToOne(mappedBy = "userid")
-    private AppCart cartUser;
+    /*@OneToOne(mappedBy = "userid")
+    private AppCart cartUser;*/
 
     private Role role;
 
