@@ -32,6 +32,8 @@ public class SecurityConfiguration {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request -> request.requestMatchers("/api/v1/auth/**")
                         .permitAll()
+                        // Add this line to permit all Swagger-related requests
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs", "/swagger-resources/**", "/swagger-ui.html", "/webjars/**", "/v3/api-docs/swagger-config").permitAll()
                         .requestMatchers("/api/v1/admin").hasAnyAuthority(Role.ADMIN.name())
                         .requestMatchers("/api/v1/user").hasAnyAuthority(Role.USER.name())
                         .anyRequest().authenticated())

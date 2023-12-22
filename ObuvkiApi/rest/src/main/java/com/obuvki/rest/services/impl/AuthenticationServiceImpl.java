@@ -30,6 +30,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     private final JWTService jwtService;
 
+    //TODO: Remove attributes firstname/lastname since in the FE only username is required
     public AppUser signup(SignUpRequest signUpRequest){
         AppUser user = new AppUser();
 
