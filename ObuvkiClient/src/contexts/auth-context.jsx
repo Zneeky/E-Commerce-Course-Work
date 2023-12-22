@@ -16,9 +16,9 @@ export const AuthProvider = ({
         try {
             const result = await authService.login(values.email, values.password);
 
-            if (result && result.accessToken) {
+            if (result && result.token) {
                 setAuth(result);
-                localStorage.setItem('accessToken', result.accessToken);
+                localStorage.setItem('accessToken', result.token);
                 navigate('/');
             } else {
                 // Set the error message to be displayed in  login component
@@ -31,12 +31,10 @@ export const AuthProvider = ({
 
     const registerSubmitHandler = async (values,setErrorMessage) => {
         try {
-            const result = await authService.register(values.email, values.password);
+            const result = await authService.register(values.username, values.email, values.password);
 
-            if (result && result.accessToken) {
-                setAuth(result);
-                localStorage.setItem('accessToken', result.accessToken);
-                navigate('/');
+            if (result) {
+                navigate('/login');
             } else {
                 // Set the error message to be displayed in  register component
                 setErrorMessage("Registration failed. Please fill all the required fields.");
