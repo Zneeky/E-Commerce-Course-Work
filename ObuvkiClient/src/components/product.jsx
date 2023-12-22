@@ -50,13 +50,13 @@ Product.propTypes = {
 }
 const ProducrWrapper =styled.div`
 .card{
-    border-color:tranparent;
-    transition:all 1s linear;
+    border-color:transparent;
+    transition:all 0.5s linear;
 }
 .card-footer{
     background:transparent;
     border-top:transparent;
-    transition:all 1s linear;
+    transition:all 0.5s linear;
 }
 &:hover{
     .card{
@@ -72,7 +72,7 @@ const ProducrWrapper =styled.div`
     overflow:hidden;
 }
 .card-img-top{
-     transition:all 1s linear;
+     transition:all 0.5s linear;
 }
 .img-container:hover .card-img-top{
     transform:scale(1.2);
@@ -85,9 +85,10 @@ const ProducrWrapper =styled.div`
     background:var(--lightBlue);
     color:var(--mainWhite);
     font-size:1.4rem;
-    border-radius:0.5 rem 0 0 0;
+    border-radius:1rem;
     transform:translate(100%, 100%);
-    transition:all 1s linear;
+    background-color:#F38181;
+    transition:all 0.5s linear;
 }
 .img-container:hover .cart-btn{
     transform:translate(0, 0);

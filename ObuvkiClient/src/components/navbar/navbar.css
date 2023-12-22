@@ -3,6 +3,10 @@
     width:100%;
     padding:10px;
     border-radius: 100px;
+    transition:all 0.5s ease-in-out;
+    &:hover{
+        transform:scale(1.1)
+    }
 }
 .nav-container{
     display: flex;
@@ -28,6 +32,10 @@ a {
     &:hover{
         background-color:#F38181;
     }
+}
+.georgia{
+    font-family: "Georgia", serif;
+    font-style: normal;
 }
 i{
     color:#635772;
