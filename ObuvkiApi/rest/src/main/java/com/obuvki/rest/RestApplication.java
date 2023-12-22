@@ -28,8 +28,8 @@ public class RestApplication implements CommandLineRunner {
 		return new WebMvcConfigurer () {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**").allowedMethods("GET", "POST", "PUT", "DELETE").allowedHeaders("*")
-						.allowedOrigins("http://localhost:5173/").allowCredentials(true);
+				registry.addMapping("/**").allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE").allowedHeaders("*")
+						.allowedOrigins("http://localhost:5173").allowCredentials(true);
 			}
 		};
 	}
