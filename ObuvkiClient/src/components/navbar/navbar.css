@@ -1,0 +1,34 @@
+.logo{
+    background-size:cover;
+    width:100%;
+    padding:10px;
+    border-radius: 100px;
+}
+.nav-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+a {
+    width:10%;
+}
+.spacer {
+    flex-grow: 1;
+}
+.button-container{
+    text-transform:capitalize;
+    font-size:1.4rem;
+    background:transparent;
+    border:none;
+    border-radius:0.5rem;
+    padding:0.5rem 0.5rem;
+    cursor:pointer;
+    margin:0.2rem 0.5rem 0.2rem 0;
+    transition:all 0.5s ease-in-out;
+    &:hover{
+        background-color:#F38181;
+    }
+}
+i{
+    color:#635772;
+}
