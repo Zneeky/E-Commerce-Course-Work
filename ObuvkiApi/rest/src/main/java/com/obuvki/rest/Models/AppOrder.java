@@ -8,8 +8,8 @@ import java.util.List;
 public class AppOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="orderid")
-    private Long orderid;
+    @Column(name="id")
+    private Long id;
 
     @Column(name="total_amount")
     private Double totalAmount;
@@ -18,11 +18,11 @@ public class AppOrder {
     private Date orderDate;
 
     @ManyToOne
-    private AppUser userid;
+    @JoinColumn(name="user_id")
+    private AppUser user;
 
     @ManyToOne
-    private AppSupplier supplierid;
+    @JoinColumn(name="supplier_id")
+    private AppSupplier supplier;
 
-    @OneToMany(mappedBy = "orderid")
-    private List<AppOrderDetails> orderDetails;
 }

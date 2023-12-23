@@ -26,12 +26,6 @@ public class AppUser implements UserDetails {
     @Column(name="username")
     private  String username;
 
-    @OneToMany(mappedBy = "userid")
-    private Set<AppOrder> orders;
-
-    /*@OneToOne(mappedBy = "userid")
-    private AppCart cartUser;*/
-
     private Role role;
 
     @Override
