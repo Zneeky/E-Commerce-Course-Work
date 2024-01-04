@@ -1,5 +1,14 @@
 import React, { Component } from "react";
 import { storeProducts, detailProduct } from "../test/data";
+import {
+    addProductToCart,
+    getAllCartProducts,
+    deleteProductInCart,
+    deleteAllInCart,
+    addQuantityToProduct,
+    decreaseQuantityToProduct
+  } from '../services/cart-service';
+import { getAllProducts } from '../services/product-service';
 const ProductContext = React.createContext();
 
 class ProductProvider extends Component {
@@ -17,15 +26,27 @@ class ProductProvider extends Component {
         this.setProducts();
     }
 
+    //ORIGINAL METHOD WHEN USING IN STORE DATA
+    // setProducts = () => {
+    //     let products = [];
+    //     storeProducts.forEach(item => {
+    //         const singleItem = { ...item };
+    //         products = [...products, singleItem];
+    //     });
+    //     this.setState(() => {
+    //         return { products };
+    //     }, this.checkCartItems);
+    // };
     setProducts = () => {
-        let products = [];
-        storeProducts.forEach(item => {
-            const singleItem = { ...item };
-            products = [...products, singleItem];
-        });
-        this.setState(() => {
-            return { products };
-        }, this.checkCartItems);
+        getAllProducts()
+            .then(products => {
+                this.setState(() => {
+                    return { products };
+                }, this.checkCartItems);
+            })
+            .catch(error => {
+                console.error("Error fetching products:", error);
+            });
     };
 
     getItem = id => {
