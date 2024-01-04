@@ -1,0 +1,51 @@
+.logo{
+    background-size:cover;
+    width:100%;
+    padding:10px;
+    border-radius: 100px;
+    transition:all 0.5s ease-in-out;
+    &:hover{
+        transform:scale(1.1)
+    }
+}
+.nav-container{
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position:sticky;
+    top:0;
+    left:0;
+}
+a {
+    width:10%;
+}
+.spacer {
+    flex-grow: 1;
+}
+.button-container{
+    text-transform:capitalize;
+    font-size:1.4rem;
+    background:transparent;
+    border:none;
+    border-radius:0.5rem;
+    padding:0.5rem 0.5rem;
+    cursor:pointer;
+    margin:0.2rem 0.5rem 0.2rem 0;
+    transition:all 0.5s ease-in-out;
+    &:hover{
+        background-color:#F38181;
+    }
+}
+.georgia{
+    font-family: "Georgia", serif;
+    font-style: normal;
+}
+i{
+    color:#635772;
+}

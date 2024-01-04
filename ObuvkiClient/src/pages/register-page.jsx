@@ -33,9 +33,6 @@ export default function Register() {
     [RegisterFormKeys.Password]: ''
     }
   );
-    
- 
-  
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -48,7 +45,7 @@ export default function Register() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor:'orange' }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -67,7 +64,6 @@ export default function Register() {
                   autoFocus
                   onChange={onChange}
                   values={values[RegisterFormKeys.Username]}
-
                 />
               </Grid>
               <Grid item xs={12}>
@@ -120,7 +116,6 @@ export default function Register() {
             </Grid>
           </Box>
         </Box>
-
       </Container>
     </ThemeProvider>
   );
