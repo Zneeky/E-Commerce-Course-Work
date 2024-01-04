@@ -9,5 +9,5 @@ export const getAllProducts =  async () =>{
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         },
       });
-    return response;
+    return response.data;
 }

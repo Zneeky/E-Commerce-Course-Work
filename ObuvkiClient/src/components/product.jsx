@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 export default class Product extends Component {
     render() {
-        const {id, title, img, price, inCart} = this.props.product;
+        const { id, productName: title, imageURL: img, price, inCart } = this.props.product;
         return (
             <ProducrWrapper className="col-9 mx-auto col-md-6 col-lg-3 my-3">
                <div className="card">
