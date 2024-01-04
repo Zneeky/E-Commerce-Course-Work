@@ -9,6 +9,11 @@ export default class Navbar extends Component {
                {<Link to='/'>
                   <img src={'/src/assets/logo.png'} alt="store"  className="logo" />
                </Link>}
+                <Link style={{textDecoration: 'none'}} to="/cart" className="ml-auto">
+                    <div className="button-container">
+                        <i className="fas fa-cart-plus"><i className="georgia">My Cart</i></i>
+                    </div>
+                </Link>
                <Link style={{textDecoration: 'none'}} to="/cart" className="ml-auto">
                    <div className="button-container">
                        <i className="fas fa-cart-plus"><i className="georgia">My Cart</i></i>
