@@ -13,12 +13,12 @@ export const getAllCartProducts = async (userId) => {
 };
 
 export const deleteProductInCart = async (productId, userId) => {
-    const url = `${baseUrl}deleteInCart?productId=${productId}&userId=${userId}`;
+    const url = `${baseUrl}deleteInCart/${productId}/${userId}`;
     return await request.remove(url);
 };
 
 export const deleteAllInCart = async (userId) => {
-    const url = `${baseUrl}deleteAllInCart?userId=${userId}`;
+    const url = `${baseUrl}deleteAllInCart/${userId}`;
     return await request.remove(url);
 };
 

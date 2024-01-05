@@ -8,4 +8,5 @@ public class ExportCartDto {
     private  String size;
     private  long quantity;
     private  String imageURL;
+    private  float total;
 }

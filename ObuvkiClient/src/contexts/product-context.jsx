@@ -24,6 +24,7 @@ class ProductProvider extends Component {
     };
     componentDidMount() {
         this.setProducts();
+        this.setProductsInCart();
     }
 
     //ORIGINAL METHOD WHEN USING IN STORE DATA
@@ -38,15 +39,15 @@ class ProductProvider extends Component {
     //     }, this.checkCartItems);
     // };
     setProducts = async () => {
-         getAllProducts()
-            .then(products => {
-                this.setState(() => {
-                    return { products };
-                }, this.checkCartItems);
-            })
-            .catch(error => {
-                console.error("Error fetching products:", error);
-            });
+        try {
+            const response = await getAllProducts();
+            const products = response.map(item => ({ ...item }));
+            this.setState(() => {
+                return { products };
+            }, this.checkCartItems);
+        } catch (error) {
+            console.error("Error fetching products:", error);
+        }
     };
 
     getItem = id => {
@@ -59,12 +60,38 @@ class ProductProvider extends Component {
             return { detailProduct: product };
         });
     };
-    addToCart = id => {
+    setProductsInCart = async () => {
+        try {
+            const userId = localStorage.getItem("userId");
+            const response = await getAllCartProducts(userId);
+            if (response) {
+                let tempProducts = [...this.state.products];
+                let cartProducts = response;
+    
+                tempProducts.forEach(product => {
+                    product.inCart = cartProducts.some(cartItem => cartItem.id === product.id);
+                });
+    
+                this.setState(() => {
+                    return { 
+                        cart: cartProducts,
+                        products: tempProducts
+                    };
+                });
+            } else {
+                console.error("Invalid response structure:", response);
+            }
+        } catch (error) {
+            console.error("Error fetching cart products:", error);
+        }
+    };
+    addToCart = async id => {
+        const userId = localStorage.getItem("userId");
         let tempProducts = [...this.state.products];
         const index = tempProducts.indexOf(this.getItem(id));
         const product = tempProducts[index];
         product.inCart = true;
-        product.count = 1;
+        product.quantity = 1;
         const price = product.price;
         product.total = price;
 
@@ -75,9 +102,7 @@ class ProductProvider extends Component {
                 detailProduct: { ...product }
             };
         }, this.addTotals);
-
-        const userId = localStorage.getItem("userId");
-        addProductToCart(id, userId)
+        await addProductToCart(id, userId)
     };
     openModal = id => {
         const product = this.getItem(id);
@@ -90,15 +115,15 @@ class ProductProvider extends Component {
             return { modalOpen: false };
         });
     };
-    increment = id => {
+    increment = async id => {
         let tempCart = [...this.state.cart];
         const selectedProduct = tempCart.find(item => {
             return item.id === id;
         });
         const index = tempCart.indexOf(selectedProduct);
         const product = tempCart[index];
-        product.count = product.count + 1;
-        product.total = product.count * product.price;
+        product.quantity = product.quantity + 1;
+        product.total = product.quantity * product.price;
         this.setState(() => {
             return {
                 cart: [...tempCart]
@@ -106,27 +131,27 @@ class ProductProvider extends Component {
         }, this.addTotals);
         
         const userId = localStorage.getItem("userId");
-        addQuantityToProduct(id,userId)
+        await addQuantityToProduct(id,userId)
     };
-    decrement = id => {
+    decrement = async id => {
         let tempCart = [...this.state.cart];
         const selectedProduct = tempCart.find(item => {
             return item.id === id;
         });
         const index = tempCart.indexOf(selectedProduct);
         const product = tempCart[index];
-        product.count = product.count - 1;
-        if (product.count === 0) {
+        product.quantity = product.quantity - 1;
+        if (product.quantity === 0) {
             this.removeItem(id);
         } else {
-            product.total = product.count * product.price;
+            product.total = product.quantity * product.price;
             this.setState(() => {
                 return { cart: [...tempCart] };
             }, this.addTotals);
         }
 
         const userId = localStorage.getItem("userId");
-        decreaseQuantityToProduct(id, userId)
+        await decreaseQuantityToProduct(id, userId)
     };
     getTotals = () => {
         // const subTotal = this.state.cart
@@ -161,14 +186,14 @@ class ProductProvider extends Component {
             }
         );
     };
-    removeItem = id => {
+    removeItem = async id => {
         let tempProducts = [...this.state.products];
         let tempCart = [...this.state.cart];
 
         const index = tempProducts.indexOf(this.getItem(id));
         let removedProduct = tempProducts[index];
         removedProduct.inCart = false;
-        removedProduct.count = 0;
+        removedProduct.quantity = 0;
         removedProduct.total = 0;
 
         tempCart = tempCart.filter(item => {
@@ -183,10 +208,10 @@ class ProductProvider extends Component {
         }, this.addTotals);
 
         const userId = localStorage.getItem("userId");
-        deleteProductInCart(id, userId);
+        await deleteProductInCart(id, userId);
         
     };
-    clearCart = () => {
+    clearCart = async () => {
         this.setState(
             () => {
                 const userId = localStorage.getItem("userId");
@@ -198,6 +223,9 @@ class ProductProvider extends Component {
                 this.addTotals();
             }
         );
+
+        const userId = localStorage.getItem("userId");
+        await deleteAllInCart(userId)
     };
     render() {
         return (
@@ -205,6 +233,7 @@ class ProductProvider extends Component {
                 value={{
                     ...this.state,
                     handleDetail: this.handleDetail,
+                    setProductsInCart:this.setProductsInCart,
                     addToCart: this.addToCart,
                     openModal: this.openModal,
                     closeModal: this.closeModal,
