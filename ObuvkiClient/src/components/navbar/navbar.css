@@ -8,6 +8,28 @@
         transform:scale(1.1)
     }
 }
+a.ml-auto{
+    width:141px;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+
+}
+.pfp-container{
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    max-width:80px;
+}
+.logout{
+    background-size:cover;
+    width:70%;
+    border-radius: 10px;
+    transition:all 0.5s ease-in-out;
+    &:hover{
+        transform:scale(1.1)
+    }
+}
 .nav-container{
     background: rgba(255, 255, 255, 0.2);
     border-radius: 16px;
@@ -24,7 +46,7 @@
     z-index: 10;
 }
 a {
-    width:10%;
+    width:15%;
 }
 .spacer {
     flex-grow: 1;
