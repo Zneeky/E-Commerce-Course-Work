@@ -19,6 +19,8 @@ export const AuthProvider = ({
             if (result && result.token) {
                 setAuth(result);
                 localStorage.setItem('accessToken', result.token);
+                localStorage.setItem('userId', result.userId);
+                localStorage.setItem('userEmail', result.userEmail);
                 navigate('/');
             } else {
                 // Set the error message to be displayed in  login component
@@ -48,7 +50,7 @@ export const AuthProvider = ({
     const logoutHandler = () => {
 
         setAuth({});
-        localStorage.removeItem('accessToken');
+        localStorage.clear();
 
     };
 

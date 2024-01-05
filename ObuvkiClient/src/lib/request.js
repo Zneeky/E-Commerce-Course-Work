@@ -63,6 +63,9 @@ const request = async (method, url, data = null) => {
         console.error('Error during Axios request:', error.message);
         // Handle or throw the error based on your use case
         throw error;
+    }finally{
+        //console.clear();
+        console.warn("JAVATA SA NASIRA NESHO, MN SLAB EZIK, nz MARTO KOLEF KAKVO MU HARESVA, ama may toy e kotlinjiq");
     }
 };
 
@@ -70,3 +73,4 @@ export const get = (url, data) => request('get', url, data);
 export const post = (url, data) => request('post', url, data);
 export const put = (url, data) => request('put', url, data);
 export const remove = (url, data) => request('delete', url, data);
+export const patch = (url,data) => request('patch', url, data);

@@ -11,7 +11,7 @@ export const login = async (email, password) => {
     return result;
 };
 
-export const register = (email, username, password) => request.post(`${baseUrl}api/v1/auth/signup`, {
+export const register = (username, email, password) => request.post(`${baseUrl}api/v1/auth/signup`, {
     email,
     username,
     password,

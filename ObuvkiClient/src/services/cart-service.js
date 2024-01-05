@@ -1,9 +1,9 @@
 import * as request from '../lib/request';
 
-const baseUrl = 'http://localhost:8080/'; //
+const baseUrl = 'http://localhost:8080/api/v1/cart/'; //
 
 export const addProductToCart = async (productId, userId) => {
-    const url = `${baseUrl}addProductToCart?productId=${productId}&userId=${userId}`;
+    const url = `${baseUrl}addProductToCart/${productId}/${userId}`;
     return await request.put(url);
 };
 
@@ -23,11 +23,11 @@ export const deleteAllInCart = async (userId) => {
 };
 
 export const addQuantityToProduct = async (productId, userId) => {
-    const url = `${baseUrl}addQuantity?productId=${productId}&userId=${userId}`;
+    const url = `${baseUrl}addQuantity/${productId}/${userId}`;
     return await request.patch(url);
 };
 
 export const decreaseQuantityToProduct = async (productId, userId) => {
-    const url = `${baseUrl}decreaseQuantity?productId=${productId}&userId=${userId}`;
+    const url = `${baseUrl}decreaseQuantity/${productId}/${userId}`;
     return await request.patch(url);
 };

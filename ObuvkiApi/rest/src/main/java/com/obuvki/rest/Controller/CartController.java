@@ -10,10 +10,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/cart")
 @RequiredArgsConstructor
+@CrossOrigin("http://localhost:5173")
 public class CartController {
     private final CartService cartService;
-    @PutMapping("/addProductToCart")
-    public void addProductToCart(@RequestParam("productId") long productId, @RequestParam("userId") long userId){
+    @PutMapping("/addProductToCart/{productId}/{userId}")
+    public void addProductToCart(@PathVariable long productId, @PathVariable long userId){
         cartService.addProductToCart(productId,userId);
     }
 
@@ -31,13 +32,13 @@ public class CartController {
         cartService.deleteAllProducts(userId);
     }
 
-    @PatchMapping("/addQuantity")
-    public void addQuantityToProduct(@RequestParam("productId") long productId, @RequestParam("userId") long userId){
+    @PatchMapping("/addQuantity/{productId}/{userId}")
+    public void addQuantityToProduct(@PathVariable long productId, @PathVariable long userId){
         cartService.increaseProductQuantity(productId, userId);
     }
 
-    @PatchMapping("/decreaseQuantity")
-    public void decreaseQuantityToProduct(@RequestParam("productId") long productId, @RequestParam("userId") long userId){
+    @PatchMapping("/decreaseQuantity/{productId}/{userId}")
+    public void decreaseQuantityToProduct(@PathVariable long productId, @PathVariable long userId){
         cartService.decreaseProductQuantity(productId, userId);
     }
 }

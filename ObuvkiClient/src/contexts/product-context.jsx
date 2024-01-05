@@ -37,8 +37,8 @@ class ProductProvider extends Component {
     //         return { products };
     //     }, this.checkCartItems);
     // };
-    setProducts = () => {
-        getAllProducts()
+    setProducts = async () => {
+         getAllProducts()
             .then(products => {
                 this.setState(() => {
                     return { products };
@@ -75,6 +75,9 @@ class ProductProvider extends Component {
                 detailProduct: { ...product }
             };
         }, this.addTotals);
+
+        const userId = localStorage.getItem("userId");
+        addProductToCart(id, userId)
     };
     openModal = id => {
         const product = this.getItem(id);
@@ -101,6 +104,9 @@ class ProductProvider extends Component {
                 cart: [...tempCart]
             };
         }, this.addTotals);
+        
+        const userId = localStorage.getItem("userId");
+        addQuantityToProduct(id,userId)
     };
     decrement = id => {
         let tempCart = [...this.state.cart];
@@ -118,6 +124,9 @@ class ProductProvider extends Component {
                 return { cart: [...tempCart] };
             }, this.addTotals);
         }
+
+        const userId = localStorage.getItem("userId");
+        decreaseQuantityToProduct(id, userId)
     };
     getTotals = () => {
         // const subTotal = this.state.cart
@@ -172,10 +181,16 @@ class ProductProvider extends Component {
                 products: [...tempProducts]
             };
         }, this.addTotals);
+
+        const userId = localStorage.getItem("userId");
+        deleteProductInCart(id, userId);
+        
     };
     clearCart = () => {
         this.setState(
             () => {
+                const userId = localStorage.getItem("userId");
+                deleteAllInCart(userId)
                 return { cart: [] };
             },
             () => {
