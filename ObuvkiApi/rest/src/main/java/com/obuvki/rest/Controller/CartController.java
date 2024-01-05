@@ -22,13 +22,13 @@ public class CartController {
     public List<ExportCartDto> getAllCartProducts(@PathVariable long userId){
         return cartService.getCartProducts(userId);
     }
-    @DeleteMapping("/deleteInCart")
-    public void deleteProductInCart(@RequestParam("productId") long productId, @RequestParam("userId") long userId){
+    @DeleteMapping("/deleteInCart/{productId}/{userId}")
+    public void deleteProductInCart(@PathVariable long productId, @PathVariable long userId){
         cartService.deleteProductInCart(productId, userId);
     }
 
-    @DeleteMapping("/deleteAllInCart")
-    public void deleteAllInCart(@RequestParam("userId") long userId){
+    @DeleteMapping("/deleteAllInCart/{userId}")
+    public void deleteAllInCart(@PathVariable long userId){
         cartService.deleteAllProducts(userId);
     }
 
