@@ -19,6 +19,15 @@ export default function CartTotals({ value }) {
                             >
                                 clear cart
                             </button>
+                            <button
+                                className="btn btn-outline-success text-uppercase mb-3 px-5"
+                                type="button"
+                                onClick={() => {
+                                    clearCart();
+                                }}
+                            >
+                                purchase
+                            </button>
                         </Link>
                         <h5>
                             <span className="text-title">subtotal :</span>
