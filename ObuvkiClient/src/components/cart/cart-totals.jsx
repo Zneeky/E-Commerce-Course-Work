@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { createOrder } from '../../services/order-service';
 
 export default function CartTotals({ value }) {
     const { cartSubTotal, cartTax, cartTotal, clearCart } = value;
@@ -22,8 +23,10 @@ export default function CartTotals({ value }) {
                             <button
                                 className="btn btn-outline-success text-uppercase mb-3 px-5"
                                 type="button"
-                                onClick={() => {
+                                onClick={async () => {
                                     clearCart();
+                                    const userId = localStorage.getItem("userId");
+                                    await createOrder(userId)
                                 }}
                             >
                                 purchase

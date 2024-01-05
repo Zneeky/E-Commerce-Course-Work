@@ -15,8 +15,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderController {
     private final OrderService orderService;
-    @PostMapping("/create")
-    public ResponseEntity<Long> createOrder(@RequestParam("userId") long userId, @RequestParam("supplierId") long supplierId){
+    @PostMapping("/create/{userId}/{supplierId}")
+    public ResponseEntity<Long> createOrder(@PathVariable long userId, @PathVariable long supplierId){
         return ResponseEntity.ok(orderService.createOrder(userId, supplierId));
     }
     @GetMapping("/get")
