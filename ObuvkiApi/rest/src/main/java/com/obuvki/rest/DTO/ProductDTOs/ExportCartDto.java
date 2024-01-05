@@ -9,4 +9,5 @@ public class ExportCartDto {
     private  long quantity;
     private  String imageURL;
     private  float total;
+    private  boolean inCart;
 }

@@ -79,6 +79,7 @@ public class CartServiceImpl implements CartService {
             exportCartDto.setImageURL(products.get(i).getImageURL());
             exportCartDto.setQuantity(cartDetails.get(i).getQuantity());
             exportCartDto.setTotal(products.get(i).getPrice() * cartDetails.get(i).getQuantity());
+            exportCartDto.setInCart(false);
             cartDtos.add(exportCartDto);
         }
 
